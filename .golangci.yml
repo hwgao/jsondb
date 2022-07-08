@@ -1,0 +1,110 @@
+run:
+  skip-dirs:
+    - vendor
+    - mock
+
+output:
+  # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
+  format: colored-line-number
+
+linters-settings:
+  govet:
+    check-shadowing: true
+    field-alignment: true
+  gocyclo:
+    min-complexity: 20
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  misspell:
+    locale: US
+  lll:
+    line-length: 140
+  goimports:
+    local-prefixes: github.com/hwgao/jsondb
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - performance
+      - style
+    disabled-checks: []
+    settings:
+      hugeParam:
+        sizeThreshold: 256
+      elseif:
+        # Whether to skip balanced if-else pairs.
+        # Default: true
+        skipBalanced: false
+  funlen:
+    lines: 100
+    statements: 50
+  gomnd:
+    # don't include the "operation" and "assign"
+    checks:
+      - argument
+      - case
+      - condition
+      - return
+    ignored-numbers:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+    ignored-functions:
+      - strings.SplitN
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - deadcode
+    - depguard
+    - dogsled
+    - dupl
+    # - errcheck
+    - exportloopref
+    - funlen
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - noctx
+    - nolintlint
+    - revive
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+    - whitespace
+
+issues:
+  exclude-rules:
+    - path: _test.go
+      linters:
+        - deadcode
+        - dogsled
+        - dupl
+        - funlen
+        - gocritic
+        - gosec
+        - govet
+        - lll
+        - ineffassign
+        - noctx
+        - unused
